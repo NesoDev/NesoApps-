@@ -1,0 +1,11 @@
+/* Aplicamos estilos a <section class="container"> */
+
+.container {
+    background: rgb(255, 255, 255);
+    height: 100%;
+    width: 100%;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+}
