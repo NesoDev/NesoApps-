@@ -1,8 +1,10 @@
+const backendUrl = "https://nesoapps.onrender.com";
+
 import createSchedules from "./schedule_actions.js";
 
 export async function sendCoursesToTheServer(courses) {
     try {
-        const response = await fetch("/schedule-generator/api/data", {
+        const response = await fetch(`${backendUrl}/schedule-generator/api/data`, {
             method: "POST",
             headers: {
                 "Content-Type": "application/json",
@@ -30,7 +32,7 @@ export async function sendArchiveToTheServer(file) {
     formData.append("pdf", file, file.name);
 
     try {
-        const response = await fetch("/schedule-generator/api/file-upload", {
+        const response = await fetch(`${backendUrl}/schedule-generator/api/file-upload`, {
             method: "POST",
             body: formData
         });
