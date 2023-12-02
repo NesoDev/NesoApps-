@@ -49,7 +49,7 @@ function createSchedule(schedule) {
     let containerTableSchedule = document.createElement("div");
     containerTableSchedule.classList.add("container-table-schedule");
 
-    console.log("   Creando tabla HTML  ");
+    console.log("   Creando tabla HTML   ");
     // Creamos una tabla
     let tableSchedule = document.createElement("table");
     tableSchedule.classList.add("table-schedule");
@@ -71,31 +71,6 @@ function createSchedule(schedule) {
     })
     console.log("   Agregamos la cabecera HTML a la tabla HTML  ");
     tableSchedule.appendChild(tHead);
-
-    let courseColors = new Map();
-    let pastelColors =  [
-        "#FFD700",
-        "#98FB98",
-        "#FFA07A",
-        "#DCD0FF",
-        "#FFFF99",
-        "#FFB6C1",
-        "#B0E0E6",
-        "#D3D3D3",
-        "#FFB6C1",
-        "#FFD700",
-        "#ADD8E6",
-        "#FF69B4",
-        "#98FB98",
-        "#DDA0DD",
-        "#FF6347",
-        "#7B68EE",
-        "#B0C4DE",
-        "#FFD700",
-        "#AFEEEE"
-    ]
-    
-    let colorIndex = 0;
 
     console.log("   Creando cuerpo HTML   ");
     
@@ -125,24 +100,15 @@ function createSchedule(schedule) {
 
         trHTML.appendChild(tdHTML);
         row.slice(0, row.length).forEach((cell, j) => {
-
-            if (!courseColors.has(cell.id) && cell.id !== '*') {
-                courseColors.set(cell.id, pastelColors[colorIndex++ % pastelColors.length]);
-            }
-
-            
-
             console.log(`----diccionario ${j}----`);
             console.log(cell);
             let tdHTML = document.createElement("td");
             tdHTML.classList.add("container-class");
             tdHTML.rowSpan = cell.row;
             tdHTML.textContent = cell.nombre;
-            console.log(tdHTML.textContent)
+            console.log(tdHTML.textContent);
             
-            if (cell.id !== '*') {
-                tdHTML.style.backgroundColor = courseColors.get(cell.id);
-            }
+            tdHTML.style.backgroundColor = cell.color;
 
             trHTML.appendChild(tdHTML);
         })

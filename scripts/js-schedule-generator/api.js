@@ -45,3 +45,35 @@ export async function sendArchiveToTheServer(file) {
         throw error;
     }
 }
+
+const pastelColors = [
+    '#C1FF72',
+    '#9FEFC6',
+    '#82B7F6',
+    '#F1FF4D',
+    '#5BFF66',
+    '#9FE9FD',
+    '#B7BCEF',
+    '#FF8686',
+    '#c5e0dc',
+    '#e0ffff'
+];
+
+export function generatePastelPaletteFromImage(courses) {
+    const pastelPalette = [];
+    const n = courses.length;
+
+    for (let i = 0; i < n; i++) {
+        const pastelColor = pastelColors[i % pastelColors.length];
+        pastelPalette.push(pastelColor);
+    }
+
+    console.log(pastelPalette);
+
+    courses.forEach((course, i) => {
+        let color = pastelPalette[i];
+        course.color = color;
+    });
+
+    return courses;
+}

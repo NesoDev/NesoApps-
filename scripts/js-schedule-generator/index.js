@@ -1,4 +1,4 @@
-import { uploadFilePDF, addCourse, addSection, removeCourse, removeSection, updateCoursesObject, showOverLaySection, closeOverLaySection, sendCoursesButtonPressed } from "./events_actions.js";
+import { uploadFilePDF, addCourse, addSection, removeCourse, removeSection, updateCoursesObject, sendCoursesButtonPressed } from "./events_actions.js";
 import { renderCourses } from "./user_interface.js";
 import { sendArchiveToTheServer } from "./api.js";
 

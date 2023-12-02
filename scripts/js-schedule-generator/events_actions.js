@@ -1,6 +1,7 @@
 import { renderCourses } from "./user_interface.js";
-import { sendCoursesToTheServer } from "./api.js";
+import { sendCoursesToTheServer, generatePastelPaletteFromImage } from "./api.js";
 import { createCanvas, createIndicatorOfActualSchedule } from "./schedule_actions.js";
+import { nullEntriesExist, invalidEntriesExist } from "./handlers.js";
 const { jsPDF } = window.jspdf;
 
 export function uploadFilePDF() {
@@ -201,10 +202,19 @@ function returnToTop() {
 export async function sendCoursesButtonPressed(courses, body) {
     try {
         console.log("-- BUTTON SEND COURSES PRESIONADO --");
+        console.log(`Cursos: ${courses}`)
+        updateCoursesObject(courses);
+
         if (!courses || courses.length === 0) {
             alert(`¡ NO EXISTEN CURSOS REGISTRADOS !`);
+        } else if (nullEntriesExist(courses)) {
+            alert(`ERROR: EXISTEN ENTRADAS SIN COMPLETAR`)
+        } else if (invalidEntriesExist(courses)) {
+            alert(`ERROR: LAS HORAS DE PRÁCTICA Y LABORATORIO NO DEBEN CRUZARSE`)
         } else {
-            updateCoursesObject(courses);
+
+            courses = generatePastelPaletteFromImage(courses);
+
             console.log(`-- ENVIANDO DATOS AL BACKEND --`);
 
             const overlaySection = await showOverLaySection(body);
@@ -237,26 +247,28 @@ export async function sendCoursesButtonPressed(courses, body) {
 
             buttondownloadOfHeaderOfOverLaySection.addEventListener("click", () => {
                 let scheduleToDownload = document.querySelector(".container-table-schedule");
-            
+
                 const rect = scheduleToDownload.getBoundingClientRect();
                 const realWidth = rect.width;
                 const realHeight = rect.height;
-            
+
                 var PDF_Width = realWidth;
                 var PDF_Height = realHeight;
-            
+
                 var canvas_image_width = PDF_Width;
                 var canvas_image_height = PDF_Height;
-            
-                html2canvas(scheduleToDownload).then(function (canvas) {
-                    var imgData = canvas.toDataURL("image/jpeg", 1.0);
+
+                var scaleFactor = 4; // Resolucion de imagen
+
+                html2canvas(scheduleToDownload, { scale: scaleFactor }).then(function (canvas) {
+                    var imgData = canvas.toDataURL("image/png");
+
                     var pdf = new jsPDF('landscape', 'pt', [PDF_Width, PDF_Height]);
-                    pdf.addImage(imgData, 'JPEG', 0, 0, canvas_image_width, canvas_image_height); // Usar (0, 0) como posición
-            
+                    pdf.addImage(imgData, 'PNG', 0, 0, canvas_image_width, canvas_image_height, '', 'FAST'); // Ajusta la calidad
+
                     pdf.save("nesoHorario.pdf");
                 });
             });
-            
 
             overlaySection.addEventListener("click", function (event) {
                 if (event.target === overlaySection) {
@@ -264,9 +276,28 @@ export async function sendCoursesButtonPressed(courses, body) {
                 }
             });
 
+            //Mostramos imagen de espera mientras cargan los horarios
+            let containerImgMessageLoadSchedule = document.createElement('div');
+            containerImgMessageLoadSchedule.classList.add('container-img-message-load-schedule');
+
+            let imgLoadSchedule = document.createElement('img');
+            imgLoadSchedule.classList.add('img-load-schedule');
+            imgLoadSchedule.src = "static/images/chika.gif";
+            containerImgMessageLoadSchedule.appendChild(imgLoadSchedule);
+
+            let messageLoadSchedule = document.createElement('div');
+            messageLoadSchedule.classList.add('message-load-schedule');
+            messageLoadSchedule.innerHTML = "<p>Estamos generando tus horarios ⚙️</p><p>Espere un momento...</p>";
+            containerImgMessageLoadSchedule.appendChild(messageLoadSchedule);
+
+            overlaySection.appendChild(containerImgMessageLoadSchedule);
+
             const schedulesHTML = await sendCoursesToTheServer(courses);
 
             console.log(`Schedules HTML: ${schedulesHTML}`);
+
+            // Eliminamos la imagen de espera
+            containerImgMessageLoadSchedule.remove();
 
             createIndicatorOfActualSchedule(overlaySection);
 
@@ -276,15 +307,15 @@ export async function sendCoursesButtonPressed(courses, body) {
             let textQuantityOfSchedules = document.querySelector(".text-quantity-of-schedules");
             textQuantityOfSchedules.textContent = schedulesHTML.length;
 
-            let buttonBeforeSchedule = document.querySelector(".button-before-schedule");
-            let buttonAfterSchedule = document.querySelector(".button-after-schedule");
+            let buttonBeforeSlide = document.querySelector(".button-before-schedule");
+            let buttonAfterSlide = document.querySelector(".button-after-schedule");
 
-            buttonBeforeSchedule.addEventListener('click', () => {
+            buttonBeforeSlide.addEventListener('click', () => {
                 console.log("Botón hacia atrás presionado");
                 indexActualSchedule = previousSchedule(indexActualSchedule, schedulesHTML, overlaySection);
             });
 
-            buttonAfterSchedule.addEventListener('click', () => {
+            buttonAfterSlide.addEventListener('click', () => {
                 console.log("Botón hacia adelante presionado");
                 indexActualSchedule = nextSchedule(indexActualSchedule, schedulesHTML, overlaySection);
             });
@@ -321,4 +352,76 @@ function previousSchedule(indexActualSchedule, schedulesHTML, overlaySection) {
         actualSchedule.textContent = indexActualSchedule + 1;
     }
     return indexActualSchedule;
+}
+
+export function showGuide(overlappedElement) {
+    console.log("-- CREANDO SHOW GUIDE --");
+
+    console.log("  EMPEZAMOS A CREAR LA CAPA SOLAPANTE  ");
+    // Creamos la capa solapante
+    let overlaySection = document.createElement("section");
+    overlaySection.classList.add('overlay-section');
+    overlaySection.id = 'overlay-section';
+    overlaySection.classList.add('show');
+
+    let slidesGuide = [
+        "https://res.cloudinary.com/dimcnbuqs/image/upload/v1701354899/1_ueuixs.png",
+        "https://res.cloudinary.com/dimcnbuqs/image/upload/v1701354760/2_uh2myi.png",
+        "https://res.cloudinary.com/dimcnbuqs/image/upload/v1701311959/3_eabe1d.png",
+        "https://res.cloudinary.com/dimcnbuqs/image/upload/v1701311943/4_zhifeh.png",
+        "https://res.cloudinary.com/dimcnbuqs/image/upload/v1701311959/5_q1h1j1.png"
+    ]
+
+    // Creamos el carrousel
+    let carruselGuide = document.createElement("div");
+    carruselGuide.classList.add('carrusel-guide');
+
+    // Creamos el contenedor de los slides
+    let containerSlides = document.createElement('div');
+    containerSlides.classList.add('container-slides');
+
+    slidesGuide.forEach((slideUrl, i) => {
+        // Creo un img
+        let imgSlide = document.createElement('img');
+        imgSlide.src = slideUrl;
+        imgSlide.alt = `Image ${i}`;
+        containerSlides.appendChild(imgSlide);
+    })
+
+    //Creamos el boton cerrar
+    //let buttonExitSlidesGuide = document.createElement('img');
+    //buttonExitSlidesGuide.classList.add("button-exit-slides-guide");
+    //buttonExitSlidesGuide.src = "https://res.cloudinary.com/dimcnbuqs/image/upload/v1701415815/Dise%C3%B1o_sin_t%C3%ADtulo_22_omnbxw.png";
+
+    let buttonExitSlidesGuide = document.createElement('input');
+    buttonExitSlidesGuide.classList.add("button-exit-slides-guide");
+    buttonExitSlidesGuide.type = "submit";
+    buttonExitSlidesGuide.value = "OMITIR"
+    buttonExitSlidesGuide.id = "button-exit-slides-guide";
+    buttonExitSlidesGuide.name = "button-exit-slides-guide";
+
+    //Creamos los botones de control
+    let buttonBeforeSlide = document.createElement("img");
+    buttonBeforeSlide.classList.add("button-scrooll-slides");
+    buttonBeforeSlide.classList.add("button-before-slide");
+    buttonBeforeSlide.src = "https://res.cloudinary.com/dimcnbuqs/image/upload/v1699952412/11_rixjho.png";
+
+    let buttonAfterSlide = document.createElement("img");
+    buttonAfterSlide.classList.add("button-scrooll-slides");
+    buttonAfterSlide.classList.add("button-after-slide");
+    buttonAfterSlide.src = "https://res.cloudinary.com/dimcnbuqs/image/upload/v1699952412/10_b1uefl.png";
+
+    overlaySection.appendChild(buttonExitSlidesGuide);
+
+    carruselGuide.appendChild(containerSlides);
+
+    overlaySection.appendChild(buttonBeforeSlide);
+
+    overlaySection.appendChild(carruselGuide);
+
+    overlaySection.appendChild(buttonAfterSlide);
+
+    overlappedElement.appendChild(overlaySection);
+
+    return document.querySelector(".overlay-section");
 }
