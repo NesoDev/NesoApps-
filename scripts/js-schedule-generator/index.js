@@ -284,6 +284,9 @@ document.addEventListener("DOMContentLoaded", function () {
     let buttonExitSlidesGuide = document.querySelector(".button-exit-slides-guide");
     let containerSlides = document.querySelector(".container-slides");
 
+    
+    overLaySection.classList.add('show');
+
     let indexSlideGuide = 0;
 
     buttonBeforeSlide.addEventListener("click", () => {
@@ -303,6 +306,12 @@ document.addEventListener("DOMContentLoaded", function () {
     buttonExitSlidesGuide.addEventListener("click", () => {
         overLaySection.remove();
     })
+
+    overLaySection.addEventListener("click", function (event) {
+        if (event.target === overLaySection) {
+            closeOverLaySection(body, overLaySection);
+        }
+    });
 
     renderCourses(courses, tableBody);
     let inputNameCourse = document.getElementById("input-name-course");

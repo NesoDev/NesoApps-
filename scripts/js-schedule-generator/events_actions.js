@@ -363,7 +363,6 @@ export function showGuide(overlappedElement) {
     let overlaySection = document.createElement("section");
     overlaySection.classList.add('overlay-section');
     overlaySection.id = 'overlay-section';
-    overlaySection.classList.add('show');
 
     let slidesGuide = [
         "https://res.cloudinary.com/dimcnbuqs/image/upload/v1701354899/1_ueuixs.png",
