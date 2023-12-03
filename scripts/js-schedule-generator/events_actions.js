@@ -282,7 +282,7 @@ export async function sendCoursesButtonPressed(courses, body) {
 
             let imgLoadSchedule = document.createElement('img');
             imgLoadSchedule.classList.add('img-load-schedule');
-            imgLoadSchedule.src = "frontend/images/chika.gif";
+            imgLoadSchedule.src = "images/chika.gif";
             containerImgMessageLoadSchedule.appendChild(imgLoadSchedule);
 
             let messageLoadSchedule = document.createElement('div');
