@@ -41,7 +41,10 @@ export function invalidEntriesExist(courses) {
                 const lapse2Init = parseHour(lapse2InitStr);
                 const lapse2End = parseHour(lapse2EndStr);
 
-                if (lapse1Init < lapse2End && lapse1End > lapse2Init) {
+                if (
+                    lapse2Init < lapse1End <= lapse2End ||
+                    lapse2Init <= lapse1Init < lapse2End
+                    ) {
                     return true;
                 }
             }
