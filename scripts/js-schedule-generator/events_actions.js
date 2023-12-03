@@ -221,6 +221,22 @@ export async function sendCoursesButtonPressed(courses, body) {
 
             console.log("overLaySection terminó de crearse");
 
+            //Mostramos imagen de espera mientras cargan los horarios
+            let containerImgMessageLoadSchedule = document.createElement('div');
+            containerImgMessageLoadSchedule.classList.add('container-img-message-load-schedule');
+
+            let imgLoadSchedule = document.createElement('img');
+            imgLoadSchedule.classList.add('img-load-schedule');
+            imgLoadSchedule.src = "https://res.cloudinary.com/dimcnbuqs/image/upload/v1701572158/chika_wb6rpr.gif";
+            containerImgMessageLoadSchedule.appendChild(imgLoadSchedule);
+
+            let messageLoadSchedule = document.createElement('div');
+            messageLoadSchedule.classList.add('message-load-schedule');
+            messageLoadSchedule.innerHTML = "<p>Estamos generando tus horarios ⚙️</p><p>Espere un momento...</p>";
+            containerImgMessageLoadSchedule.appendChild(messageLoadSchedule);
+
+            overlaySection.appendChild(containerImgMessageLoadSchedule);
+
             let headerOfOverLaySection = document.querySelector(".header-of-overlay");
             headerOfOverLaySection.addEventListener("mouseover", () => {
                 headerOfOverLaySection.style.opacity = 1;
@@ -275,22 +291,6 @@ export async function sendCoursesButtonPressed(courses, body) {
                     closeOverLaySection(body, overlaySection);
                 }
             });
-
-            //Mostramos imagen de espera mientras cargan los horarios
-            let containerImgMessageLoadSchedule = document.createElement('div');
-            containerImgMessageLoadSchedule.classList.add('container-img-message-load-schedule');
-
-            let imgLoadSchedule = document.createElement('img');
-            imgLoadSchedule.classList.add('img-load-schedule');
-            imgLoadSchedule.src = "https://res.cloudinary.com/dimcnbuqs/image/upload/v1701572158/chika_wb6rpr.gif";
-            containerImgMessageLoadSchedule.appendChild(imgLoadSchedule);
-
-            let messageLoadSchedule = document.createElement('div');
-            messageLoadSchedule.classList.add('message-load-schedule');
-            messageLoadSchedule.innerHTML = "<p>Estamos generando tus horarios ⚙️</p><p>Espere un momento...</p>";
-            containerImgMessageLoadSchedule.appendChild(messageLoadSchedule);
-
-            overlaySection.appendChild(containerImgMessageLoadSchedule);
 
             const schedulesHTML = await sendCoursesToTheServer(courses);
 
