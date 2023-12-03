@@ -282,7 +282,7 @@ export async function sendCoursesButtonPressed(courses, body) {
 
             let imgLoadSchedule = document.createElement('img');
             imgLoadSchedule.classList.add('img-load-schedule');
-            imgLoadSchedule.src = "images/chika.gif";
+            imgLoadSchedule.src = "https://res.cloudinary.com/dimcnbuqs/image/upload/v1701572158/chika_wb6rpr.gif";
             containerImgMessageLoadSchedule.appendChild(imgLoadSchedule);
 
             let messageLoadSchedule = document.createElement('div');
