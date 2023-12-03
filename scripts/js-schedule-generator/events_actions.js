@@ -120,7 +120,6 @@ export async function showOverLaySection(overlappedElement) {
     let overlaySection = document.createElement("section");
     overlaySection.classList.add('overlay-section');
     overlaySection.id = 'overlay-section';
-    overlaySection.classList.add('show');
 
     document.querySelector("header").classList.add("header-over-lay");
 
@@ -220,6 +219,8 @@ export async function sendCoursesButtonPressed(courses, body) {
             const overlaySection = await showOverLaySection(body);
 
             console.log("overLaySection terminó de crearse");
+
+            overlaySection.classList.add('show');
 
             //Mostramos imagen de espera mientras cargan los horarios
             let containerImgMessageLoadSchedule = document.createElement('div');
