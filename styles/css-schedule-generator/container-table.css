@@ -73,6 +73,7 @@ th {
 .div-schedule-cell select {
     height: 40px;
     width: 100%;
+    text-align: center;
 }
 
 .div-schedule-cell select option {
@@ -83,12 +84,14 @@ th {
 .div-schedule-cell input {
     height: 38px;
     width: 100%;
+    text-align: center;
 }
 
 .preference-cell input {
     height: 38px;
     width: 87px;
     padding: 0 8px 0 8px;
+    text-align: center;
 }
 
 .preference-cell input::placeholder {

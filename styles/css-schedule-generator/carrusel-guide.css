@@ -1,0 +1,62 @@
+.carrusel-guide {
+    max-width: 80%;
+    overflow: hidden;
+}
+
+.container-slides {
+    display: flex;
+    transition: transform 1s ease;
+}
+
+.container-slides img {
+    width: 100%;
+    flex: 0 0 auto;
+}
+
+.button-scrooll-slides {
+    width: 8%;
+    font-size: 24px;
+    background-color: transparent;
+    border: none;
+    cursor: pointer;
+    outline: none;
+
+    border-radius: 1.5rem;
+    opacity: 0.5;
+    transition: transform 0.3s ease;
+    cursor: pointer;
+}
+
+.button-scrooll-slides:hover {
+    opacity: 1;
+}
+
+.button-before-slide {
+    position: absolute;
+    left: 10px;
+}
+
+.button-after-slide {
+    position: absolute;
+    right: 10px;
+}
+
+.button-exit-slides-guide {
+    position: fixed;
+    bottom: 25px;
+    padding: 12px 15px;
+    height: auto;
+    border: none;
+    cursor: pointer;
+    border-radius: 1.2rem;
+    color: #fff;
+    font-family: sans-serif;
+    font-size: 15px;
+    font-weight: 700;
+    letter-spacing: 2px;
+    background: #6238ee;
+}
+
+.button-exit-slides-guide:hover {
+    background: #660ab7;
+}
