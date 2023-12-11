@@ -1,14 +1,22 @@
 .carrusel-guide {
-    max-width: 80%;
+    max-width: 70%;
     overflow: hidden;
+    height: 70%;
+    width: auto;
+    display: flex;
+    justify-content: center;
+    align-items: center;
 }
 
 .container-slides {
+    width: auto;
+    height: 100%;
     display: flex;
     transition: transform 1s ease;
 }
 
 .container-slides img {
+    height: 100%;
     width: 100%;
     flex: 0 0 auto;
 }
