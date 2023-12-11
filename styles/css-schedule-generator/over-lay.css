@@ -176,6 +176,10 @@
     }
 
     .container-of-indicator-actual-page {
-        font-size: 50px:
+        font-size: 50px;
+        height: 90px;
+        bottom: 153px;
     }
+
+    
 }
