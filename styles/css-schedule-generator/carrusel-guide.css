@@ -77,7 +77,8 @@
     }
 
     .button-exit-slides-guide {
-        font-size: 70px;
+        font-size: 65px;
         bottom: 206px;    
+        border-radius: 1.5rem;
     }
 }
