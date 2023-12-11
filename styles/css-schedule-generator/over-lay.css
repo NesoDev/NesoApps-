@@ -161,3 +161,17 @@
     background: transparent;
     padding: 0 20px 0 0;
 }
+
+@media (max-width: 980px) {
+    .header-of-overlay {
+        height: 292px;
+    }
+
+    .icon-of-header-of-overlay {
+        width: 76%;
+    }       
+
+    .canvas {
+        height: 24%;
+    }
+}
