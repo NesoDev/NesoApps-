@@ -11,3 +11,9 @@
     gap: 60px;
     background: #fff;
 }
+
+@media (max-width: 980px) {
+    .container {
+        padding: 138px 0px;
+    }
+}
