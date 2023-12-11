@@ -167,7 +167,7 @@
         height: 292px;
     }
 
-    .container-img-icon-back {
+    .container-img-icon-back, .container-img-icon-download {
         width: 115px;
     }       
 
@@ -176,6 +176,6 @@
     }
 
     .container-of-indicator-actual-page {
-        font-size: 40px:
+        font-size: 50px:
     }
 }
