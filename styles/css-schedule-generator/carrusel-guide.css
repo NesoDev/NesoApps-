@@ -15,7 +15,6 @@
     }
 
     .button-exit-slides-guide {
-        width: 30%;
         font-size: 50px;
         bottom: 106px;    
     }
@@ -76,6 +75,7 @@
     font-weight: 700;
     letter-spacing: 2px;
     background: #6238ee;
+    width: auto;
 }
 
 .button-exit-slides-guide:hover {
