@@ -10,8 +10,15 @@
 
 @media (max-width: 980px) {
     .carrusel-guide {
-        height: 30%;
+        height: 25%;
         max-width: 75%;
+    }
+
+    .button-exit-slides-guide {
+        width: 30%;
+        heigth: 90px;
+        font-size: 40px;
+        bottom: 100px 
     }
 }
 
