@@ -167,11 +167,15 @@
         height: 292px;
     }
 
-    .icon-of-header-of-overlay {
-        width: 76%;
+    .container-img-icon-back {
+        width: 115px;
     }       
 
     .canvas {
-        height: 24%;
+        height: 25%;
+    }
+
+    .container-of-indicator-actual-page {
+        font-size: 40px:
     }
 }
