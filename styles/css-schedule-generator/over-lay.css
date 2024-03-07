@@ -106,14 +106,13 @@
 }
 
 .canvas {
-    height: 0;
     width: 100%;
-    background: #00000000;
+    background: transparent;
     display: flex;
     justify-content: space-evenly;
     align-items: center;
     gap: 50px;
-    border-radius: 2rem;
+    height: 70%;
 }
 
 .container-of-indicator-actual-page {
@@ -161,4 +160,26 @@
 .text-quantity-of-schedules {
     background: transparent;
     padding: 0 20px 0 0;
+}
+
+@media (max-width: 980px) {
+    .header-of-overlay {
+        height: 292px;
+    }
+
+    .container-img-icon-back, .container-img-icon-download {
+        width: 115px;
+    }       
+
+    .canvas {
+        height: 25%;
+    }
+
+    .container-of-indicator-actual-page {
+        font-size: 50px;
+        height: 90px;
+        bottom: 153px;
+    }
+
+    
 }

@@ -1,14 +1,22 @@
 .carrusel-guide {
-    max-width: 80%;
+    max-width: 70%;
     overflow: hidden;
+    height: 70%;
+    width: auto;
+    display: flex;
+    justify-content: center;
+    align-items: center;
 }
 
 .container-slides {
+    width: auto;
+    height: 100%;
     display: flex;
     transition: transform 1s ease;
 }
 
 .container-slides img {
+    height: 100%;
     width: 100%;
     flex: 0 0 auto;
 }
@@ -55,8 +63,22 @@
     font-weight: 700;
     letter-spacing: 2px;
     background: #6238ee;
+    width: auto;
 }
 
 .button-exit-slides-guide:hover {
     background: #660ab7;
+}
+
+@media (max-width: 980px) {
+    .carrusel-guide {
+        height: 18%;
+        max-width: 75%;
+    }
+
+    .button-exit-slides-guide {
+        font-size: 65px;
+        bottom: 206px;    
+        border-radius: 1.5rem;
+    }
 }

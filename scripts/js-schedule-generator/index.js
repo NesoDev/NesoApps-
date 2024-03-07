@@ -277,6 +277,10 @@ window.onbeforeunload = function () {
     window.scrollTo(0, 0);
 };
 
+window.onbeforeunload = function () {
+    window.scrollTo(0, 0);
+};
+
 document.addEventListener("DOMContentLoaded", function () {
     let overLaySection = showGuide(body);
     let buttonBeforeSlide = document.querySelector(".button-before-slide");
