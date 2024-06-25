@@ -6,7 +6,7 @@ import { addRouteToMap, createMap, switchToMap } from "./map-functions.js";
 import { uploadJson } from "./canvas-functions.js";
 import { fillInputs } from "./menu-functions.js";
 
-let path = '../files/nodes_unmsm.json';
+let path = './files/nodes_unmsm.json';
 let nodes;
 let points;
 let network;
