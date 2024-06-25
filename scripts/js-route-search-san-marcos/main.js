@@ -48,13 +48,16 @@ document.addEventListener("DOMContentLoaded", async () => {
             containerInputsButton.classList.remove('container-inputs-button-show');
             buttonHidden.style.display = 'none';
             buttonShow.style.display = 'block';
+            console.log("Escondiendo menú");
         }
+    
         if (event.target === buttonShow) {
             let containerInputsButton = document.querySelector(".container-inputs-button-hidden");
             containerInputsButton.classList.add('container-inputs-button-show');
             containerInputsButton.classList.remove('container-inputs-button-hidden');
             buttonHidden.style.display = 'block';
             buttonShow.style.display = 'none';
+            console.log("Mostrando menú");
         }
     });
 
