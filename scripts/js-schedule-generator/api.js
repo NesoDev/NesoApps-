@@ -1,4 +1,4 @@
-const backendUrl = "https://nesoapps.onrender.com";
+const backendUrl = "https://neso-apps-backend.vercel.app";
 import createSchedules from "./schedule_actions.js";
 export async function sendCoursesToTheServer(courses) {
     try {
